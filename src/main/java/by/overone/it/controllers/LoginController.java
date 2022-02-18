@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class RegistrationController {
+public class LoginController {
 
     private UserService userService;
     private AuthorizeValidation authorizeValidation;
 
     @Autowired
-    public RegistrationController(UserService userService, AuthorizeValidation authorizeValidation) {
+    public LoginController(UserService userService, AuthorizeValidation authorizeValidation) {
         this.userService = userService;
         this.authorizeValidation = authorizeValidation;
     }
 
-    @GetMapping("/registration")
-    public String showRegistrationPage() {
-        return "register_page";
+    @GetMapping({"/", "/login"})
+    public String showLoginPage() {
+        return "login_page";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/login")
     public String checkInputData(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
-            @RequestParam("repassword") String repassword,
             Model model
     ) {
-        String error = authorizeValidation.validateRegistrationData(username, password, repassword);
+        String error = authorizeValidation.validateLoginData(username, password);
 
         if (!error.isEmpty()) {
             model.addAttribute("error", error);
-            return "register_page";
+            return "login_page";
         } else {
-            userService.save(username, password);
-            return "redirect:/";
+            return "redirect:/home";
         }
     }
+
 }

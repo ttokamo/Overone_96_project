@@ -2,8 +2,11 @@ package by.overone.it.repository;
 
 import by.overone.it.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, String> {
+
+    @Query("from User where username =:username")
+    User findUserByUsername(@Param("username") String username);
 }
