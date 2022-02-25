@@ -4,6 +4,12 @@
     <title>Title</title>
 </head>
 <body>
-Home
+<a href="/users" >
+    Список пользователей
+</a>
+<a href="#">
+    Выход
+</a>
+<br> ${username}
 </body>
 </html>

@@ -6,6 +6,8 @@ import by.overone.it.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -25,5 +27,13 @@ public class UserService {
 
     public User getUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(String id) {
+        return userRepository.getById(id);
     }
 }
