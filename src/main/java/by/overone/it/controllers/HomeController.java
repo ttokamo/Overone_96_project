@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("userId")
@@ -20,8 +21,21 @@ public class HomeController {
 
     @GetMapping("/user/{id}")
     public String showHomePage(@PathVariable("id") String id, Model model) {
-        String username = userService.getUserById(id).getUsername();
-        model.addAttribute("username", username);
+        Optional<User> user = userService.getUserById(id);
+
+        if (user.isPresent()) {
+            String flag = "thisIsMainUser";
+            if (checkIfThisMainUser(id, model.getAttribute("userId").toString())) {
+                model.addAttribute(flag, true);
+            } else {
+                model.addAttribute(flag, false);
+            }
+            model.addAttribute("username", user.get().getUsername());
+
+        } else {
+            return "redirect:/registration";
+        }
+
         return "home_page";
     }
 
@@ -30,5 +44,9 @@ public class HomeController {
         List<User> userList = userService.getAllUsers();
         model.addAttribute("usersList", userList);
         return "users";
+    }
+
+    private boolean checkIfThisMainUser(String pathId, String currentId) {
+        return pathId.equals(currentId);
     }
 }
