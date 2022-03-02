@@ -6,6 +6,8 @@ import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class AuthorizeValidation {
 
@@ -14,11 +16,11 @@ public class AuthorizeValidation {
 
     public String validateLoginData(String username, String password) {
         String error = "";
-        User user = userService.getUserByUsername(username);
+        Optional<User> user = userService.getUserByUsername(username);
 
-        if (user == null) {
+        if (!user.isPresent()) {
             error = "User not found";
-        } else if (!user.getPassword().equals(PasswordEncoder.encodePassword(password))) {
+        } else if (!user.get().getPassword().equals(PasswordEncoder.encodePassword(password))) {
             error = "Incorrect password";
         }
         return error;
@@ -31,7 +33,7 @@ public class AuthorizeValidation {
     ) {
         String error = "";
 
-        if (userService.getUserByUsername(username) != null) {
+        if (userService.getUserByUsername(username).isPresent()) {
             error = "User already exists";
         } else if (!password.equals(repassword)) {
             error = "Password mismatch";

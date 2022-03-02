@@ -13,9 +13,24 @@
 <a href="/users">
     Список пользователей
 </a>
+<c:if test="${role == 'ADMIN'}">
+    <a href="/admin">
+        Админ панель
+    </a>
+</c:if>
 <a href="#">
     Выход
 </a>
-<br> ${username}
+<br> ${username} <br>
+
+
+<c:if test="${thisIsMainUser == true}">
+    This is main user page
+</c:if>
+
+<c:if test="${thisIsMainUser == false}">
+    This is not main user page
+</c:if>
+
 </body>
 </html>

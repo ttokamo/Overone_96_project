@@ -19,14 +19,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void save(String username, String password) {
+    public void save(String username, String password, String role) {
         User user = new User();
         user.setUsername(username);
+        user.setRole(role);
         user.setPassword(PasswordEncoder.encodePassword(password));
         save(user);
     }
 
-    public User getUserByUsername(String username) {
+
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
 

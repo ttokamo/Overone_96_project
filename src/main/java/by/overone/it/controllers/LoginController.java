@@ -1,5 +1,6 @@
 package by.overone.it.controllers;
 
+import by.overone.it.entity.User;
 import by.overone.it.service.UserService;
 import by.overone.it.validation.AuthorizeValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.Optional;
+
 @Controller
-@SessionAttributes("userId")
+@SessionAttributes({"userId", "role"})
 public class LoginController {
 
     private UserService userService;
@@ -40,9 +43,10 @@ public class LoginController {
             model.addAttribute("error", error);
             return "login_page";
         } else {
-            String id = userService.getUserByUsername(username).getId();
-            model.addAttribute("userId", id);
-            return "redirect:/user/" + id;
+            Optional<User> user = userService.getUserByUsername(username);
+            model.addAttribute("userId", user.get().getId());
+            model.addAttribute("role", user.get().getRole());
+            return "redirect:/user/" + user.get().getId();
         }
     }
 

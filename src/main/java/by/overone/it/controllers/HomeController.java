@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("userId")
+@SessionAttributes({"userId", "role"})
 public class HomeController {
 
     @Autowired
@@ -31,7 +31,6 @@ public class HomeController {
                 model.addAttribute(flag, false);
             }
             model.addAttribute("username", user.get().getUsername());
-
         } else {
             return "redirect:/registration";
         }
