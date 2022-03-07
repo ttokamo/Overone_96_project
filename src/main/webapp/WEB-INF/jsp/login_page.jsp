@@ -24,9 +24,9 @@ ${error}<br>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <a href="/registration">
-        <button class="btn btn-primary">Registration</button>
-    </a>
 </form>
+<a href="/registration">
+    <button class="btn btn-primary">Registration</button>
+</a>
 </body>
 </html>

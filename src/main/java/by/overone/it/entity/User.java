@@ -1,5 +1,7 @@
 package by.overone.it.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -7,41 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Getter
 public class User {
 
     @Id
     @GeneratedValue(generator = "uuid-generator")
     @GenericGenerator(name = "uuid-generator", strategy = "uuid")
     private String id;
+    @Setter
     private String username;
+    @Setter
     private String password;
+    @Setter
     private String role;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getRole() {
-        return role;
-    }
+    @Setter
+    private String status;
 }

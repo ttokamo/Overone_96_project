@@ -2,6 +2,7 @@ package by.overone.it.service;
 
 import by.overone.it.encoder.PasswordEncoder;
 import by.overone.it.entity.User;
+import by.overone.it.enums.StatusEnums;
 import by.overone.it.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,14 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setRole(role);
+        user.setStatus(StatusEnums.ACTIVE.name());
         user.setPassword(PasswordEncoder.encodePassword(password));
         save(user);
     }
 
+    public void updateUserStatusById(String status, String id) {
+        userRepository.updateUserStatusById(status, id);
+    }
 
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
@@ -38,5 +43,9 @@ public class UserService {
 
     public Optional<User> getUserById(String id) {
         return userRepository.findById(id);
+    }
+
+    public void deleteUserById(String id) {
+        userRepository.deleteById(id);
     }
 }
