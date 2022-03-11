@@ -1,7 +1,6 @@
 package by.overone.it.controllers;
 
 import by.overone.it.entity.User;
-import by.overone.it.enums.RoleEnums;
 import by.overone.it.enums.StatusEnums;
 import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -25,8 +23,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String showAdminPanel(Model model) {
         ArrayList<User> userList =
-                (ArrayList<User>) userService
-                        .getAllUsers()
+                (ArrayList<User>) userService.getAllUsers()
                         .stream()
                         .filter(i -> !i.getUsername().equals("ADMIN"))
                         .collect(Collectors.toList());
@@ -44,6 +41,12 @@ public class AdminController {
     @GetMapping("/block/{id}")
     public String blockUser(@PathVariable("id") String id) {
         userService.updateUserStatusById(StatusEnums.BLOCKED.name(), id);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/unblock/{id}")
+    public String unblockUser(@PathVariable("id") String id) {
+        userService.updateUserStatusById(StatusEnums.ACTIVE.name(), id);
         return "redirect:/admin";
     }
 }

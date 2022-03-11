@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes({"userId", "role"})
@@ -40,7 +41,11 @@ public class HomeController {
 
     @GetMapping("/users")
     public String showAllUsers(Model model) {
-        List<User> userList = userService.getAllUsers();
+        ArrayList<User> userList =
+                (ArrayList<User>) userService.getAllUsers()
+                        .stream()
+                        .filter(i -> !i.getUsername().equals("ADMIN"))
+                        .collect(Collectors.toList());
         model.addAttribute("usersList", userList);
         return "users";
     }

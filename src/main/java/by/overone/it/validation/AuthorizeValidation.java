@@ -2,6 +2,7 @@ package by.overone.it.validation;
 
 import by.overone.it.encoder.PasswordEncoder;
 import by.overone.it.entity.User;
+import by.overone.it.enums.StatusEnums;
 import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,8 @@ public class AuthorizeValidation {
             error = "User not found";
         } else if (!user.get().getPassword().equals(PasswordEncoder.encodePassword(password))) {
             error = "Incorrect password";
+        } else if (user.get().getStatus().equals(StatusEnums.BLOCKED.name())) {
+            error = "Account is blocked";
         }
         return error;
     }

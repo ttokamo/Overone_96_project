@@ -13,14 +13,26 @@
 
 <c:forEach items="${userList}" var="user">
     <a href="/user/${user.id}">
-        ${user.username}
+            ${user.username}
     </a>
+
     <a href="/delete/${user.id}">
         Delete
     </a>
-    <a href="/block/${user.id}">
-        Block
-    </a> <br>
+
+
+    <c:if test="${user.status == 'ACTIVE'}">
+        <a href="/block/${user.id}">
+            Block
+        </a> <br>
+    </c:if>
+
+    <c:if test="${user.status == 'BLOCKED'}">
+        <a href="/unblock/${user.id}">
+            Unblock
+        </a> <br>
+    </c:if>
+
 </c:forEach>
 
 </body>

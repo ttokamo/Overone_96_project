@@ -12,9 +12,12 @@
 <body>
 
 <c:forEach items="${usersList}" var="user">
-    <a href="/user/${user.id}">
-            ${user.username} <br>
-    </a>
+
+    <c:if test="${userId != user.id}">
+        <a href="/user/${user.id}">
+                ${user.username} <br>
+        </a>
+    </c:if>
 </c:forEach>
 
 </body>
