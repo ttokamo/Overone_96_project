@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<a href="/user/${userId}">
+    Профиль
+</a> <br><br>
+
 <c:forEach items="${userList}" var="user">
     <a href="/user/${user.id}">
             ${user.username}

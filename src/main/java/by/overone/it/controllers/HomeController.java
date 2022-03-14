@@ -31,6 +31,7 @@ public class HomeController {
             } else {
                 model.addAttribute(flag, false);
             }
+            model.addAttribute("image", user.get().getPathToImage());
             model.addAttribute("username", user.get().getUsername());
         } else {
             return "redirect:/registration";

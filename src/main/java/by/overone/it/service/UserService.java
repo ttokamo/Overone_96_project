@@ -48,4 +48,8 @@ public class UserService {
     public void deleteUserById(String id) {
         userRepository.deleteById(id);
     }
+
+    public void updatePathToImageById(String path, String id) {
+        userRepository.updateUserPathToImageById(path, id);
+    }
 }

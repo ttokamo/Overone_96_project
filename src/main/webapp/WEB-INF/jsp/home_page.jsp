@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <link href="../css/style.css"  rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>
@@ -18,11 +19,20 @@
         Админ панель
     </a>
 </c:if>
-<a href="#">
+
+<a href="/settings">
+    Настройки
+</a>
+
+<a href="/logout">
     Выход
 </a>
+
 <br> ${username} <br>
 
+<div class="user-photo">
+    <img src="../${image}" alt="user-photo"/><br>
+</div>
 
 <c:if test="${thisIsMainUser == true}">
     This is main user page

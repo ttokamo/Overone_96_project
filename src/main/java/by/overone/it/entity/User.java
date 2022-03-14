@@ -24,4 +24,6 @@ public class User {
     private String role;
     @Setter
     private String status;
+    @Setter
+    private String pathToImage;
 }

@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<a href="/user/${userId}">
+    Профиль
+</a> <br><br>
+
 <c:forEach items="${usersList}" var="user">
 
     <c:if test="${userId != user.id}">
