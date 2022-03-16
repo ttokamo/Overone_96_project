@@ -14,6 +14,11 @@
 <a href="/users">
     Список пользователей
 </a>
+
+<a href="/news">
+    Новости
+</a>
+
 <c:if test="${role == 'ADMIN'}">
     <a href="/admin">
         Админ панель

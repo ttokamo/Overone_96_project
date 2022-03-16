@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -22,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("update User set pathToImage =:path where id =:id")
     @Modifying
     void updateUserPathToImageById(@Param("path") String path, @Param("id") String id);
+
+    @Query("from User where upper(username) like %:inputText%")
+    List<User> searchUserUsernameByInputText(@Param("inputText") String inputText);
 }

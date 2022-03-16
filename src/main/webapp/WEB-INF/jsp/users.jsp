@@ -10,10 +10,15 @@
     <title>Title</title>
 </head>
 <body>
-
 <a href="/user/${userId}">
     Профиль
-</a> <br><br>
+</a>
+
+<form method="post" action="/users">
+    <input type="text" name="userSearch"/>
+    <button type="submit">Найти</button>
+</form>
+<br><br>
 
 <c:forEach items="${usersList}" var="user">
 

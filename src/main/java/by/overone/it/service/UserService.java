@@ -24,6 +24,7 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setRole(role);
+        user.setPathToImage("user-images/user-profile-img.png");
         user.setStatus(StatusEnums.ACTIVE.name());
         user.setPassword(PasswordEncoder.encodePassword(password));
         save(user);
@@ -51,5 +52,9 @@ public class UserService {
 
     public void updatePathToImageById(String path, String id) {
         userRepository.updateUserPathToImageById(path, id);
+    }
+
+    public List<User> searchUserUsernameByInputText(String inputText) {
+        return userRepository.searchUserUsernameByInputText(inputText);
     }
 }
