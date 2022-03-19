@@ -20,22 +20,20 @@
             ${user.username}
     </a>
 
-    <a href="/delete/${user.id}">
-        Delete
-    </a>
+
+    <form action="/admin-action" method="post">
+        <button type="submit" name="delete ${user.id}">Delete</button>
 
 
-    <c:if test="${user.status == 'ACTIVE'}">
-        <a href="/block/${user.id}">
-            Block
-        </a> <br>
-    </c:if>
+        <c:if test="${user.status == 'ACTIVE'}">
+            <button type="submit" name="block ${user.id}">Block</button>
+        </c:if>
 
-    <c:if test="${user.status == 'BLOCKED'}">
-        <a href="/unblock/${user.id}">
-            Unblock
-        </a> <br>
-    </c:if>
+        <c:if test="${user.status == 'BLOCKED'}">
+            <button type="submit" name="unblock ${user.id}">Unblock</button>
+            <br>
+        </c:if>
+    </form>
 
 </c:forEach>
 

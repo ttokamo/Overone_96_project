@@ -13,16 +13,18 @@
 
 <a href="/logout">
     Выход
-</a>
+</a> <br><br>
 
 <c:forEach items="${messagesList}" var="message">
-    ${message.userNickname} <br>
+    <a href="/user/${message.ownerId}">
+            ${message.ownerNickname}
+    </a><br>
     ${message.text} <br>
     ${message.postTime} <br><br>
 </c:forEach>
 
 <form method="post" action="/news">
-    <input type="text" name="userMessage"/>
+    <input type="text" name="userMessage" autofocus/>
     <button type="submit">Отправить</button>
 </form>
 

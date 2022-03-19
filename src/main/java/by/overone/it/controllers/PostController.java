@@ -1,6 +1,7 @@
 package by.overone.it.controllers;
 
 import by.overone.it.entity.User;
+import by.overone.it.entity.UserPost;
 import by.overone.it.service.UserPostService;
 import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,7 +26,8 @@ public class PostController {
 
     @GetMapping("/news")
     public String showUsersPostsPage(Model model) {
-        model.addAttribute("messagesList", userPostService.getMessagesList());
+        List<UserPost> userPostsList = userPostService.getMessagesList();
+        model.addAttribute("messagesList", userPostsList);
         return "users_posts_page";
     }
 
@@ -32,6 +35,6 @@ public class PostController {
     public String saveUserMessage(@RequestParam("userMessage") String message, Model model) {
         Optional<User> user = userService.getUserById(String.valueOf(model.getAttribute("userId")));
         userPostService.save(message, user.get().getId(), user.get().getUsername());
-        return "users_posts_page";
+        return "redirect:/news";
     }
 }
