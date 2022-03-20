@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+/**
+ * Контроллер, который отвечает за работу домашней страницы пользователя
+ */
 @Controller
 @SessionAttributes({"userId", "role"})
 public class HomeController {
@@ -20,6 +24,12 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод, который отображает страницу профиля пользователя по адресу /user/{id}
+     * где {id} - идентификатор пользователя. Содержит в себе логику проверки пользователя на существование,
+     * а так же перенаправляет всех неавторизированных пользователей на страницу регистрации
+     * @param id идентификатор из адресной строки
+     */
     @GetMapping("/user/{id}")
     public String showHomePage(@PathVariable("id") String id, Model model) {
         Optional<User> user = userService.getUserById(id);
@@ -40,6 +50,10 @@ public class HomeController {
         return "home_page";
     }
 
+    /**
+     * Метод, который отображает страницу со списком всех пользователей КРОМЕ администратора
+     * @return страница со списком пользователей
+     */
     @GetMapping("/users")
     public String showAllUsers(Model model) {
         ArrayList<User> userList =
@@ -51,6 +65,13 @@ public class HomeController {
         return "users";
     }
 
+    /**
+     * Метод, который сравнивает id из сессии и id из адресной строки.
+     * Нужен для того что бы различать свою и чужие страницы
+     * @param pathId id из адресной строки
+     * @param currentId id главного пользователя
+     * @return true или false
+     */
     private boolean checkIfThisMainUser(String pathId, String currentId) {
         return pathId.equals(currentId);
     }

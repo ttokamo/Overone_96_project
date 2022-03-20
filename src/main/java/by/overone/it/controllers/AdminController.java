@@ -16,6 +16,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+/**
+ * Контроллер, который отвечает за работу функционала администратора
+ */
 @Controller
 @SessionAttributes({"userId", "role"})
 public class AdminController {
@@ -23,6 +27,11 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод, который срабатывает по адресу /admin и отображает страницу admin_page
+     * на которой отображается список всех пользователей КРОМЕ самого администратора
+     * @return страница
+     */
     @GetMapping("/admin")
     public String showAdminPanel(Model model) {
         ArrayList<User> userList =
@@ -35,8 +44,12 @@ public class AdminController {
         return "admin_page";
     }
 
+    /**
+     * Метод, который обрабатывает нажатие кнопки Delete/Block/Unblock пользователя
+     * @return перенаправление на страницу администратора
+     */
     @PostMapping("/admin-action")
-    public String doAdminAction(HttpServletRequest request) {
+    public String doAdminAction() {
         return "redirect:/admin";
     }
 }
