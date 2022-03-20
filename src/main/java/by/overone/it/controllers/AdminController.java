@@ -49,7 +49,7 @@ public class AdminController {
      * @return перенаправление на страницу администратора
      */
     @PostMapping("/admin-action")
-    public String doAdminAction() {
+    public String takeAdminAction() {
         return "redirect:/admin";
     }
 }

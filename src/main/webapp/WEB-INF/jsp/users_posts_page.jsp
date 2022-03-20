@@ -17,7 +17,7 @@
 
 <c:forEach items="${messagesList}" var="message">
     <a href="/user/${message.ownerId}">
-            ${message.ownerNickname}
+            ${message.ownerUsername}
     </a><br>
     ${message.text} <br>
     ${message.postTime} <br><br>
