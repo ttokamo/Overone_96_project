@@ -13,7 +13,13 @@
 
 <a href="/user/${userId}">
     Профиль
-</a> <br><br>
+</a>
+
+<a href="/admin/add-user">
+    Добавить пользователя
+</a>
+
+<br><br>
 
 <c:forEach items="${userList}" var="user">
     <a href="/user/${user.id}">
@@ -22,15 +28,15 @@
 
 
     <form action="/admin-action" method="post">
-        <button type="submit" name="delete ${user.id}">Delete</button>
+        <button type="submit" name="adminActionButton" value="DELETE ${user.id}">Delete</button>
 
 
         <c:if test="${user.status == 'ACTIVE'}">
-            <button type="submit" name="block ${user.id}">Block</button>
+            <button type="submit" name="adminActionButton" value="BLOCK ${user.id}">Block</button>
         </c:if>
 
-        <c:if test="${user.status == 'BLOCKED'}">
-            <button type="submit" name="unblock ${user.id}">Unblock</button>
+        <c:if test="${user.status == 'BLOCK'}">
+            <button type="submit" name="adminActionButton" value="UNBLOCK ${user.id}">Unblock</button>
             <br>
         </c:if>
     </form>

@@ -60,6 +60,7 @@ public class HomeController {
                 (ArrayList<User>) userService.getAllUsers()
                         .stream()
                         .filter(i -> !i.getUsername().equals("ADMIN"))
+                        .filter(i -> !i.getUsername().startsWith("test"))
                         .collect(Collectors.toList());
         model.addAttribute("usersList", userList);
         return "users";
