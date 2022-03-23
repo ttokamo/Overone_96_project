@@ -15,8 +15,8 @@
     Список пользователей
 </a>
 
-<a href="/news">
-    Новости
+<a href="/topics">
+    Обсуждения
 </a>
 
 <c:if test="${role == 'ADMIN'}">
