@@ -15,6 +15,24 @@ ${topic.get().createDate}<br><br>
     <input type="text" name="comment" placeholder="Input comment here..." autofocus>
     <button type="submit">Отправить</button>
 </form>
+<br><br>
+
+<c:forEach items="${comments}" var="comment">
+    <a href="/user/${comment.authorId}">
+            ${comment.authorUsername}
+    </a><br>
+    ${comment.comment}<br>
+    ${comment.createdDate}
+
+
+    <c:if test="${userId == comment.authorId || role == 'ADMIN'}">
+        <form method="post" action="/topic/${comment.topicId}">
+            <button type="submit" name="deleteComment" value="${comment.id}">Удалить</button>
+        </form>
+    </c:if>
+
+    <br>
+</c:forEach><br>
 
 </body>
 </html>

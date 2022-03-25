@@ -1,6 +1,8 @@
 package by.overone.it.controllers;
 
+import by.overone.it.entity.TopicComments;
 import by.overone.it.entity.User;
+import by.overone.it.service.TopicCommentsService;
 import by.overone.it.service.TopicService;
 import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,16 @@ import java.util.Optional;
 @SessionAttributes({"userId", "role"})
 public class TopicController {
 
+    private final TopicService topicService;
+    private final UserService userService;
+    private final TopicCommentsService topicCommentsService;
+
     @Autowired
-    private TopicService topicService;
-    @Autowired
-    private UserService userService;
+    public TopicController(TopicService topicService, UserService userService, TopicCommentsService topicCommentsService) {
+        this.topicService = topicService;
+        this.userService = userService;
+        this.topicCommentsService = topicCommentsService;
+    }
 
     @GetMapping("/topics")
     public String showPageWithListOfTopics(Model model) {
@@ -48,8 +56,10 @@ public class TopicController {
     }
 
     @GetMapping("/topic/{id}")
-    public String showSingleTopicPage(@PathVariable("id") String id, Model model) {
-        model.addAttribute("topic", topicService.getTopicById(id));
+    public String showSingleTopicPage(@PathVariable("id") String topicId, Model model) {
+        model.addAttribute("topic", topicService.getTopicById(topicId));
+        model.addAttribute("comments", topicCommentsService.getCommentsListByTopicId(topicId));
         return "topic_page";
     }
+
 }
