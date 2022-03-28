@@ -1,15 +1,18 @@
 package by.overone.it.controllers;
 
-import by.overone.it.entity.TopicComments;
 import by.overone.it.entity.User;
 import by.overone.it.service.TopicCommentsService;
 import by.overone.it.service.TopicService;
 import by.overone.it.service.UserService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
@@ -40,17 +43,22 @@ public class TopicController {
         return "topics_page";
     }
 
+    @SneakyThrows
     @PostMapping("/create-topic")
     public String createTopic(
             @RequestParam("topicName") String topicName,
             @RequestParam("topicMessage") String topicMessage,
+            @RequestParam("topicImage") MultipartFile file,
             Model model
     ) {
+        Path path = Paths.get("src", "main", "webapp", "topic-images", file.getOriginalFilename());
+        file.transferTo(path);
         Optional<User> author = userService.getUserById(String.valueOf(model.getAttribute("userId")));
         topicService.save(
                 author.get().getId(),
                 author.get().getUsername(),
                 topicName,
+                "topic-images/" + file.getOriginalFilename(),
                 topicMessage);
         return "redirect:/topics";
     }
@@ -60,6 +68,15 @@ public class TopicController {
         model.addAttribute("topic", topicService.getTopicById(topicId));
         model.addAttribute("comments", topicCommentsService.getCommentsListByTopicId(topicId));
         return "topic_page";
+    }
+
+    @PostMapping("/delete-topic")
+    public String deleteTopic(
+            @RequestParam("deleteTopicButton") String buttonValue,
+            Model model
+    ) {
+
+        return "";
     }
 
 }

@@ -26,5 +26,7 @@ public class TopicComments {
     @Setter
     private String comment;
     @Setter
+    private String pathToCommentImage;
+    @Setter
     private LocalDateTime createdDate;
 }

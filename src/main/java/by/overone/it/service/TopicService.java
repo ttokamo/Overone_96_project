@@ -19,12 +19,14 @@ public class TopicService {
             String authorId,
             String authorUsername,
             String topicName,
+            String pathToTopicImage,
             String message
     ) {
         Topic topic = new Topic();
         topic.setAuthorId(authorId);
         topic.setAuthor(authorUsername);
         topic.setTopicName(topicName);
+        topic.setPathToTopicImage(pathToTopicImage);
         topic.setMessage(message);
         topic.setCreateDate(LocalDateTime.now());
         save(topic);
@@ -40,5 +42,10 @@ public class TopicService {
 
     public Optional<Topic> getTopicById(String id) {
         return topicRepository.findById(id);
+    }
+
+    public void deleteTopicAndCommentsByTopicId(String topicId) {
+
+        topicRepository.deleteById(topicId);
     }
 }
