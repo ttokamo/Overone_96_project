@@ -1,10 +1,14 @@
 package by.overone.it.service;
 
 import by.overone.it.entity.Topic;
+import by.overone.it.entity.TopicComments;
 import by.overone.it.repository.TopicRepository;
+import by.overone.it.util.FileWorker;
+import by.overone.it.util.PathsNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +18,8 @@ public class TopicService {
 
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private TopicCommentsService topicCommentsService;
 
     public void save(
             String authorId,
@@ -26,7 +32,7 @@ public class TopicService {
         topic.setAuthorId(authorId);
         topic.setAuthor(authorUsername);
         topic.setTopicName(topicName);
-        topic.setPathToTopicImage(pathToTopicImage);
+        topic.setImageFileName(pathToTopicImage);
         topic.setMessage(message);
         topic.setCreateDate(LocalDateTime.now());
         save(topic);
@@ -44,8 +50,25 @@ public class TopicService {
         return topicRepository.findById(id);
     }
 
+    @Transactional
     public void deleteTopicAndCommentsByTopicId(String topicId) {
+        List<TopicComments> commentsList = topicCommentsService.getCommentsListByTopicId(topicId);
+
+        for (TopicComments comment : commentsList) {
+            topicCommentsService.deleteCommentAndCommentImageById(comment.getId());
+        }
+
+        Topic topic = topicRepository.getById(topicId);
+
+        if (!topic.getImageFileName().isEmpty()) {
+            FileWorker.deleteFile(
+                    PathsNames.getPathToTopicImages(
+                            topic.getImageFileName()
+                    )
+            );
+        }
 
         topicRepository.deleteById(topicId);
+
     }
 }

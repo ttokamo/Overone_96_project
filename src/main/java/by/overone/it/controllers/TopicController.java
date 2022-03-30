@@ -58,7 +58,7 @@ public class TopicController {
                 author.get().getId(),
                 author.get().getUsername(),
                 topicName,
-                "topic-images/" + file.getOriginalFilename(),
+                file.getOriginalFilename(),
                 topicMessage);
         return "redirect:/topics";
     }
@@ -71,12 +71,9 @@ public class TopicController {
     }
 
     @PostMapping("/delete-topic")
-    public String deleteTopic(
-            @RequestParam("deleteTopicButton") String buttonValue,
-            Model model
-    ) {
-
-        return "";
+    public String deleteTopic(@RequestParam("deleteTopicButton") String topicId) {
+        topicService.deleteTopicAndCommentsByTopicId(topicId);
+        return "redirect:/topics";
     }
 
 }

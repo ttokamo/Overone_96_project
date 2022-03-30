@@ -25,7 +25,7 @@ public class Topic {
     @Setter
     private String topicName;
     @Setter
-    private String pathToTopicImage;
+    private String imageFileName;
     @Setter
     private LocalDateTime createDate;
 }

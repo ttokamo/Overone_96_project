@@ -26,7 +26,7 @@ public class TopicComments {
     @Setter
     private String comment;
     @Setter
-    private String pathToCommentImage;
+    private String imageFileName;
     @Setter
     private LocalDateTime createdDate;
 }

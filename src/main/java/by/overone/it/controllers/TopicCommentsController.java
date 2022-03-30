@@ -48,7 +48,7 @@ public class TopicCommentsController {
                 topicId,
                 user.get().getId(),
                 user.get().getUsername(),
-                "topic-images/topic-comments-images/" + file.getOriginalFilename(),
+                file.getOriginalFilename(),
                 comment
         );
         return "redirect:/topic/" + topicId;

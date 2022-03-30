@@ -18,8 +18,9 @@
 ${topic.get().author}<br>
 ${topic.get().topicName}<br>
 ${topic.get().message}<br>
-<c:if test="${comment.pathToCommentImage != null}">
-    <img src="../${topic.get().pathToTopicImage}"><br>
+
+<c:if test="${topic.get().imageFileName != null}">
+    <img src="../topic-images/${topic.get().imageFileName}"><br>
 </c:if>
 ${topic.get().createDate}<br>
 
@@ -43,8 +44,8 @@ ${topic.get().createDate}<br>
             ${comment.authorUsername}
     </a><br>
     ${comment.comment}<br>
-    <c:if test="${comment.pathToCommentImage != null}">
-        <img src="../${comment.pathToCommentImage}"/><br>
+    <c:if test="${comment.imageFileName != null}">
+        <img src="../topic-images/topic-comments-images/${comment.imageFileName}"/><br>
     </c:if>
     ${comment.createdDate}
 

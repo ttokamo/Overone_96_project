@@ -2,14 +2,13 @@ package by.overone.it.service;
 
 import by.overone.it.entity.TopicComments;
 import by.overone.it.repository.TopicCommentsRepository;
+import by.overone.it.util.FileWorker;
+import by.overone.it.util.PathsNames;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class TopicCommentsService {
         topicComments.setAuthorId(authorId);
         topicComments.setAuthorUsername(authorUsername);
         topicComments.setTopicId(topicId);
-        topicComments.setPathToCommentImage(pathToCommentImage);
+        topicComments.setImageFileName(pathToCommentImage);
         topicComments.setComment(comment);
         topicComments.setCreatedDate(LocalDateTime.now());
         save(topicComments);
@@ -49,14 +48,17 @@ public class TopicCommentsService {
     }
 
     @SneakyThrows
+    @Transactional
     public void deleteCommentAndCommentImageById(String id) {
         TopicComments comment = getTopicById(id);
-        Path path = Paths.get("src", "main", "webapp", comment.getPathToCommentImage());
-        File file = new File(String.valueOf(path));
-        if (file.delete()) {
-            repository.deleteById(id);
-        } else {
-            throw new IOException("Error during deleting path to comment image");
+
+        if (!comment.getImageFileName().isEmpty()) {
+            FileWorker.deleteFile(
+                    PathsNames.getPathToTopicCommentsImages(
+                            comment.getImageFileName()
+                    ));
         }
+
+        repository.deleteById(id);
     }
 }
