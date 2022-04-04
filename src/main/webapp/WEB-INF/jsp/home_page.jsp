@@ -35,9 +35,11 @@
 
 <br> ${username} <br>
 
-<div class="user-photo">
-    <img src="../${image}" alt="user-photo"/><br>
-</div>
+<c:if test="${!empty image}">
+    <div class="user-photo">
+        <img src="../${image}" alt="user-photo"/><br>
+    </div>
+</c:if>
 
 <c:if test="${thisIsMainUser == true}">
     This is main user page

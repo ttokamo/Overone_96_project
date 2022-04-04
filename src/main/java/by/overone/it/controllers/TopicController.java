@@ -4,20 +4,22 @@ import by.overone.it.entity.User;
 import by.overone.it.service.TopicCommentsService;
 import by.overone.it.service.TopicService;
 import by.overone.it.service.UserService;
+import by.overone.it.util.FileWorker;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
 @SessionAttributes({"userId", "role"})
 public class TopicController {
+
+    Logger logger;
 
     private final TopicService topicService;
     private final UserService userService;
@@ -51,8 +53,10 @@ public class TopicController {
             @RequestParam("topicImage") MultipartFile file,
             Model model
     ) {
-        Path path = Paths.get("src", "main", "webapp", "topic-images", file.getOriginalFilename());
-        file.transferTo(path);
+        if (!file.isEmpty()) {
+            FileWorker.saveFileFromTopic(file);
+        }
+
         Optional<User> author = userService.getUserById(String.valueOf(model.getAttribute("userId")));
         topicService.save(
                 author.get().getId(),

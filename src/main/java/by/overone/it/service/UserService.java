@@ -34,7 +34,6 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setRole(role);
-        user.setPathToImage("user-images/user-profile-img.png");
         user.setStatus(StatusEnums.ACTIVE.name());
         user.setPassword(PasswordEncoder.encodePassword(password));
         save(user);

@@ -19,7 +19,7 @@ ${topic.get().author}<br>
 ${topic.get().topicName}<br>
 ${topic.get().message}<br>
 
-<c:if test="${topic.get().imageFileName != null}">
+<c:if test="${!empty topic.get().imageFileName}">
     <img src="../topic-images/${topic.get().imageFileName}"><br>
 </c:if>
 ${topic.get().createDate}<br>
@@ -44,7 +44,7 @@ ${topic.get().createDate}<br>
             ${comment.authorUsername}
     </a><br>
     ${comment.comment}<br>
-    <c:if test="${comment.imageFileName != null}">
+    <c:if test="${!empty comment.imageFileName}">
         <img src="../topic-images/topic-comments-images/${comment.imageFileName}"/><br>
     </c:if>
     ${comment.createdDate}
