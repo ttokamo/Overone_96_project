@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Optional;
 
+/**
+ * Класс, отвечающий за работу формы авторизации пользователя
+ */
 @Controller
 @SessionAttributes({"userId", "role"})
 public class LoginController {
@@ -26,11 +29,24 @@ public class LoginController {
         this.authorizeValidation = authorizeValidation;
     }
 
+    /**
+     * Метод отображающий страницу авторизации
+     * @return страница авторизации
+     */
     @GetMapping({"/", "/login"})
     public String showLoginPage() {
         return "login_page";
     }
 
+    /**
+     * Метод, который принимает введенные данные с формы и отправляет на проверку.
+     * Если проверка не прошла - возращает страницу авторизации и отображает сообщение об ошибке.
+     * Если проверка прошла успешно - перенаправляет на домашнюю страницу пользователя.
+     * @param username имя пользователя с формы
+     * @param password пароль с формы
+     * @param model модель страницы
+     * @return в хорошем случае - перенаправление на домашнюю страницу, в плохом - возвращает страницу логина
+     */
     @PostMapping("/login")
     public String checkInputData(
             @RequestParam("username") String username,

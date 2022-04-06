@@ -16,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
+/**
+ * Класс, который отвечает за комментарии пользователей под постами
+ */
 @Controller
 @SessionAttributes("userId")
 public class TopicCommentsController {
@@ -25,6 +28,14 @@ public class TopicCommentsController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Принимает данные с формы и сохраняет комментарий в бд
+     * @param topicId идентификатор поста
+     * @param comment текст комментария
+     * @param file файл
+     * @param model модель страницы
+     * @return перенаправление на страницу поста, на которой находился пользователь
+     */
     @SneakyThrows
     @PostMapping("/add-comment/{id}")
     public String saveComment(
@@ -47,6 +58,12 @@ public class TopicCommentsController {
         return "redirect:/topic/" + topicId;
     }
 
+    /**
+     * Метод, который отвечает за удаление комментария по его идентификатору
+     * @param topicId идентификатор поста
+     * @param commentId идентификатор комментария
+     * @return перенаправление на страницу поста, на котором находился пользователь
+     */
     @PostMapping("/topic/{id}")
     public String deleteComment(
             @PathVariable("id") String topicId,

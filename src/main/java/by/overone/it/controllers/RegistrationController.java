@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+/**
+ * Класс, который отвечает за регистрацию пользователя
+ */
 @Controller
 @SessionAttributes({"userId", "role"})
 public class RegistrationController {
@@ -24,11 +27,25 @@ public class RegistrationController {
         this.authorizeValidation = authorizeValidation;
     }
 
+    /**
+     * Метод, который отображает страницу регистрации
+     * @return страница регистрации
+     */
     @GetMapping("/registration")
     public String showRegistrationPage() {
         return "register_page";
     }
 
+    /**
+     * Метод, который принимает введенные данные с формы регистрации и отправляет их на проверку.
+     * Если проверка не прошла - возращает страницу регистрации и отображает сообщение об ошибке.
+     * Если проверка прошла успешно - перенаправляет на страницу авторизации.
+     * @param username имя пользователя с формы
+     * @param password пароль с формы
+     * @param repassword повторение пароля с формы
+     * @param model модель страницы
+     * @return либо страница регистрации, либо перенаправление на страницу авторизации
+     */
     @PostMapping("/registration")
     public String checkInputData(
             @RequestParam("username") String username,

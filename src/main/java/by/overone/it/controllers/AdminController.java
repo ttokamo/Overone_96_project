@@ -1,7 +1,6 @@
 package by.overone.it.controllers;
 
 import by.overone.it.entity.User;
-import by.overone.it.enums.AdminActionEnums;
 import by.overone.it.enums.RoleEnums;
 import by.overone.it.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import static by.overone.it.enums.AdminActionEnums.*;
 
 
 /**
@@ -49,11 +42,20 @@ public class AdminController {
         return "admin_page";
     }
 
+    /**
+     * Отображает страницу добавления пользователя
+     * @return страница добавления пользователя
+     */
     @GetMapping("/admin/add-user")
     public String showAddUserPage() {
         return "add-user-page";
     }
 
+    /**
+     * Метод, который сохраняет пользователя и добавляет к его имени "test".
+     * @param username имя пользователя
+     * @return страница добавления пользователя (admin)
+     */
     @PostMapping("/admin/add-user")
     public String saveNewUser(@RequestParam("username") String username) {
         String refactoredUsername = "test" + username;
@@ -62,7 +64,9 @@ public class AdminController {
     }
 
     /**
-     * Метод, который обрабатывает нажатие кнопки Delete/Block/Unblock пользователя
+     * Метод, который обрабатывает нажатие кнопки Delete/Block/Unblock пользователя.
+     * Значение кнопки приходит строкой и содержит в себе два слова, где первое слово - действие,
+     * а авторое - индетификатор пользователя.
      * @return перенаправление на страницу администратора
      */
     @PostMapping("/admin-action")
@@ -72,6 +76,11 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    /**
+     * Метод, который совершает действие(Удаление/Изменение статуса) над пользователям в бд по id в зависимости от входящего параметра.
+     * @param action действие, которое будет происходить (DELETE/BLOCK/UNBLOCK)
+     * @param id индентификатор пользователя
+     */
     private void checkAndTakeAdminAction(String action, String id) {
         switch (action) {
             case "DELETE":

@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Класс, который отвечает за страницу настроек пользователя
+ */
 @Controller
 @SessionAttributes({"userId", "role"})
 public class SettingsController {
@@ -21,11 +24,21 @@ public class SettingsController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод, который отображает страницу настроек
+     * @return страница настроек
+     */
     @GetMapping("/settings")
     public String showSettingsPage() {
         return "settings_page";
     }
 
+    /**
+     * Метод, который принимает изображение с формы и сохраняет по пути /webapp/user-images/{fileName}
+     * @param multipartFile файл с формы
+     * @param model модель страницы
+     * @return страница настроек
+     */
     @SneakyThrows
     @PostMapping("/add-photo")
     public String savePhoto(@RequestParam("image") MultipartFile multipartFile, Model model) {

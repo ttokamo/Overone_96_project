@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ public class Topic {
     @Id
     @GeneratedValue(generator = "uuid-generator")
     @GenericGenerator(name = "uuid-generator", strategy = "uuid")
+    @Column(nullable = false)
     private String id;
     @Setter
     private String authorId;
