@@ -28,6 +28,7 @@ public class AdminController {
     /**
      * Метод, который срабатывает по адресу /admin и отображает страницу admin_page
      * на которой отображается список всех пользователей КРОМЕ самого администратора
+     *
      * @return страница
      */
     @GetMapping("/admin")
@@ -44,6 +45,7 @@ public class AdminController {
 
     /**
      * Отображает страницу добавления пользователя
+     *
      * @return страница добавления пользователя
      */
     @GetMapping("/admin/add-user")
@@ -53,6 +55,7 @@ public class AdminController {
 
     /**
      * Метод, который сохраняет пользователя и добавляет к его имени "test".
+     *
      * @param username имя пользователя
      * @return страница добавления пользователя (admin)
      */
@@ -67,6 +70,7 @@ public class AdminController {
      * Метод, который обрабатывает нажатие кнопки Delete/Block/Unblock пользователя.
      * Значение кнопки приходит строкой и содержит в себе два слова, где первое слово - действие,
      * а авторое - индетификатор пользователя.
+     *
      * @return перенаправление на страницу администратора
      */
     @PostMapping("/admin-action")
@@ -78,8 +82,9 @@ public class AdminController {
 
     /**
      * Метод, который совершает действие(Удаление/Изменение статуса) над пользователям в бд по id в зависимости от входящего параметра.
+     *
      * @param action действие, которое будет происходить (DELETE/BLOCK/UNBLOCK)
-     * @param id индентификатор пользователя
+     * @param id     индентификатор пользователя
      */
     private void checkAndTakeAdminAction(String action, String id) {
         switch (action) {

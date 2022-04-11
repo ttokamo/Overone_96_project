@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     /**
      * Поиск пользователя по его имени пользователя(username)
+     *
      * @param username имя пользователя
      */
     @Query("from User where username =:username")
@@ -25,8 +26,9 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     /**
      * Обновляет статус аккаунта пользователя по id
+     *
      * @param status новый статус
-     * @param id идентификатор
+     * @param id     идентификатор
      */
     @Query("update User set status =:status where id =:id")
     @Modifying
@@ -34,8 +36,9 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     /**
      * Обновляет путь до изображения пользователя
+     *
      * @param path путь до картинки
-     * @param id идентификатор
+     * @param id   идентификатор
      */
     @Query("update User set pathToImage =:path where id =:id")
     @Modifying
@@ -43,6 +46,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     /**
      * Поиск имени пользователя по введенному значению
+     *
      * @param inputText введенный текст
      * @return список пользователей, у которых имя пользователя подходит под введенные параметры
      */

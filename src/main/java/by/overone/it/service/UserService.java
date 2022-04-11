@@ -26,9 +26,10 @@ public class UserService {
      * Метод, который создает и заполняет сущность пользователя. Далее вызывает метод сохранения пользователя в БД.
      * Кроме установленных параметров так же автоматически устанавливает статус аккаунта (ACTIVE), путь до
      * стандартной картинки профиля и автоматически шифрует пароль.
+     *
      * @param username имя пользователя
      * @param password пароль пользователя
-     * @param role роль пользователя
+     * @param role     роль пользователя
      */
     public void save(String username, String password, String role) {
         User user = new User();
@@ -41,6 +42,7 @@ public class UserService {
 
     /**
      * Метод сохранения пользователя в базу данных
+     *
      * @param user объект типа User
      */
     private void save(User user) {
@@ -49,8 +51,9 @@ public class UserService {
 
     /**
      * Обновляет статус аккаунта пользователя по id
+     *
      * @param status новый статус
-     * @param id идентификатор
+     * @param id     идентификатор
      */
     public void updateUserStatusById(String status, String id) {
         userRepository.updateUserStatusById(status, id);
@@ -58,6 +61,7 @@ public class UserService {
 
     /**
      * Поиск пользователя по его имени пользователя(username)
+     *
      * @param username имя пользователя
      */
     public Optional<User> getUserByUsername(String username) {
@@ -66,6 +70,7 @@ public class UserService {
 
     /**
      * Метод, который возвращает весь список пользователей
+     *
      * @return список пользователей
      */
     public List<User> getAllUsers() {
@@ -74,6 +79,7 @@ public class UserService {
 
     /**
      * Метод, который находит пользователя по его id
+     *
      * @param id идентификатор пользователя
      */
     public Optional<User> getUserById(String id) {
@@ -82,6 +88,7 @@ public class UserService {
 
     /**
      * Метод, который удаляет пользователя по его id
+     *
      * @param id идентификатор пользователя
      */
     public void deleteUserById(String id) {
@@ -90,8 +97,9 @@ public class UserService {
 
     /**
      * Обновляет путь до изображения пользователя
+     *
      * @param path путь до картинки
-     * @param id идентификатор
+     * @param id   идентификатор
      */
     public void updatePathToImageById(String path, String id) {
         userRepository.updateUserPathToImageById(path, id);
@@ -99,6 +107,7 @@ public class UserService {
 
     /**
      * Поиск имени пользователя по введенному значению
+     *
      * @param inputText введенный текст
      * @return список пользователей, у которых имя пользователя подходит под введенные параметры
      */

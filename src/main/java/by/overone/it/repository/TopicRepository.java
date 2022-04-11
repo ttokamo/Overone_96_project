@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 
+/**
+ * Репозиторий, который позволяет работать с обсуждениями в базе данных
+ */
 @Transactional
 public interface TopicRepository extends JpaRepository<Topic, String> {
 }

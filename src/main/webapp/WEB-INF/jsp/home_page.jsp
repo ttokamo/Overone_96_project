@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link href="../css/style.css"  rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>

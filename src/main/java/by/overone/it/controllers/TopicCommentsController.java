@@ -30,10 +30,11 @@ public class TopicCommentsController {
 
     /**
      * Принимает данные с формы и сохраняет комментарий в бд
+     *
      * @param topicId идентификатор поста
      * @param comment текст комментария
-     * @param file файл
-     * @param model модель страницы
+     * @param file    файл
+     * @param model   модель страницы
      * @return перенаправление на страницу поста, на которой находился пользователь
      */
     @SneakyThrows
@@ -60,15 +61,15 @@ public class TopicCommentsController {
 
     /**
      * Метод, который отвечает за удаление комментария по его идентификатору
-     * @param topicId идентификатор поста
+     *
+     * @param topicId   идентификатор поста
      * @param commentId идентификатор комментария
      * @return перенаправление на страницу поста, на котором находился пользователь
      */
     @PostMapping("/topic/{id}")
     public String deleteComment(
             @PathVariable("id") String topicId,
-            @RequestParam("deleteComment") String commentId)
-    {
+            @RequestParam("deleteComment") String commentId) {
         topicCommentsService.deleteCommentAndCommentImageById(commentId);
         return "redirect:/topic/" + topicId;
     }

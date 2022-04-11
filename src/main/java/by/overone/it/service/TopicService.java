@@ -50,6 +50,11 @@ public class TopicService {
         return topicRepository.findById(id);
     }
 
+    /**
+     * Удаляет обсуждение и все связанные с ним комментарии, в том числе и изображения
+     *
+     * @param topicId идентификатор обсуждения
+     */
     @Transactional
     public void deleteTopicAndCommentsByTopicId(String topicId) {
         List<TopicComments> commentsList = topicCommentsService.getCommentsListByTopicId(topicId);

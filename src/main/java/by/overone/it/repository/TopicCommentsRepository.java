@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Репозиторий, который работает с бд для комментариев
+ */
 @Transactional
 public interface TopicCommentsRepository extends JpaRepository<TopicComments, String> {
 

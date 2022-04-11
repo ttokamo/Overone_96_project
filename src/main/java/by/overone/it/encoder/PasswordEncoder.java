@@ -6,6 +6,7 @@ public class PasswordEncoder {
 
     /**
      * Метод шифрования пароля
+     *
      * @param password пароль
      * @return зашифрованный пароль
      */

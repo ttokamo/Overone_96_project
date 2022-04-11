@@ -9,12 +9,23 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * Класс валидации данных
+ */
 @Component
 public class AuthorizeValidation {
 
     @Autowired
     private UserService userService;
 
+    /**
+     * Проверяет данные с формы авторизации. В хорошем случае возвращает пустую строку.
+     * В плохом случае возвращает строку с ошибкой
+     *
+     * @param username имя пользователя
+     * @param password пароль
+     * @return пустая строка либо строка с ошибкой
+     */
     public String validateLoginData(String username, String password) {
         String error = "";
         Optional<User> user = userService.getUserByUsername(username);
@@ -29,6 +40,15 @@ public class AuthorizeValidation {
         return error;
     }
 
+    /**
+     * Проверяет данные с формы регистрации. В хорошем случае возвращает пустую строку.
+     * В плохом случае возвращает строку с ошибкой.
+     *
+     * @param username   имя пользователя
+     * @param password   пароль
+     * @param repassword поторение пароля
+     * @return пустая строка либо строка с ошибкой
+     */
     public String validateRegistrationData(
             String username,
             String password,

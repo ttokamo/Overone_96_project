@@ -18,6 +18,15 @@ public class TopicCommentsService {
     @Autowired
     private TopicCommentsRepository repository;
 
+    /**
+     * Сохраняет сущность комментария в базе данных
+     *
+     * @param topicId            идентификатор обсуждения
+     * @param authorId           идентификатор автора
+     * @param authorUsername     имя пользователя автора
+     * @param pathToCommentImage путь до изображения
+     * @param comment            комментарий
+     */
     public void save(
             String topicId,
             String authorId,
@@ -47,6 +56,12 @@ public class TopicCommentsService {
         return repository.getById(id);
     }
 
+
+    /**
+     * Удаляет комментарий и его изображение
+     *
+     * @param id идентификатор комментария
+     */
     @SneakyThrows
     @Transactional
     public void deleteCommentAndCommentImageById(String id) {

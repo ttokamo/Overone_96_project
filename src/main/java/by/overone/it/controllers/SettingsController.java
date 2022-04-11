@@ -26,6 +26,7 @@ public class SettingsController {
 
     /**
      * Метод, который отображает страницу настроек
+     *
      * @return страница настроек
      */
     @GetMapping("/settings")
@@ -35,8 +36,9 @@ public class SettingsController {
 
     /**
      * Метод, который принимает изображение с формы и сохраняет по пути /webapp/user-images/{fileName}
+     *
      * @param multipartFile файл с формы
-     * @param model модель страницы
+     * @param model         модель страницы
      * @return страница настроек
      */
     @SneakyThrows

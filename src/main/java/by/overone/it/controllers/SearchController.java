@@ -18,8 +18,9 @@ public class SearchController {
 
     /**
      * Метод, который ищет имя пользователя по введенному тексту
+     *
      * @param userSearch введенный текст
-     * @param model модель страницы
+     * @param model      модель страницы
      * @return возвращает страницу с результатами поиска
      */
     @PostMapping("/users")
